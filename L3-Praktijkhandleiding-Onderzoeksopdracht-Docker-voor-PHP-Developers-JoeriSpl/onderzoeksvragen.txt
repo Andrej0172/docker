@@ -1,0 +1,10 @@
+Onderzoeksvraag 1
+Als je RUN docker-php-ext-install pdo pdo_mysql weglaat krijg je de foutmelding Fatal error: Uncaught Error: Class "PDO" not found. PHP heeft deze extensie nodig om met MySQL te kunnen communiceren.
+
+Onderzoeksvraag 2
+host=db werkt omdat Docker Compose een intern netwerk aanmaakt waarbij elke service bereikbaar is via zijn servicenaam. db verwijst naar de servicenaam in docker-compose.yml onder services:. localhost werkt niet omdat dat alleen naar de eigen container verwijst, niet naar een andere container.
+
+Onderzoeksvraag 3
+Ja, wijzigingen zijn direct zichtbaar zonder herstart. Dit komt door de bind-mount in docker-compose.yml:
+yaml- ./src:/var/www/html
+Deze regel koppelt je lokale src map direct aan de map in de container. Ze delen dezelfde bestanden, dus elke wijziging op je laptop is direct zichtbaar in de browser.
